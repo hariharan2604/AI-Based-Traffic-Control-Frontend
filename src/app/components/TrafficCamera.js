@@ -9,7 +9,7 @@ export default function TrafficCamera({ title, wsUrl }) {
 
     return (
         <motion.div
-            className="p-6 bg-gray-800/70 backdrop-blur-md rounded-xl shadow-lg border border-gray-700 text-white transition-all hover:scale-[1.02]"
+            className="p-6 bg-gray-800/70 rounded-xl shadow-lg border border-gray-700 text-white transition-all hover:scale-[1.02]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
         >
