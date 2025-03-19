@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-export default function SignalStatus({ mqttTopic }) {
+
+
+export default function SignalStatus({ mqttTopic, size = "large" }) {
     const [signalData, setSignalData] = useState(null);
     const [remainingTime, setRemainingTime] = useState(0);
     const [lastUpdate, setLastUpdate] = useState(null);
@@ -39,7 +41,6 @@ export default function SignalStatus({ mqttTopic }) {
         };
     }, [mqttTopic, lastUpdate]);
 
-    // Timer Effect (Countdown)
     useEffect(() => {
         if (remainingTime > 0) {
             const timer = setInterval(() => {
@@ -49,15 +50,22 @@ export default function SignalStatus({ mqttTopic }) {
         }
     }, [remainingTime]);
 
-    if (!signalData) return <p>Loading...</p>;
+    if (!signalData) return <p className="text-white text-center">Loading...</p>;
+
+    const signalSize = size === "small" ? "w-8 h-8" : "w-12 h-12";
+    const borderSize = size === "small" ? "border-2" : "border-4";
 
     return (
-        <div className="mt-4 p-4 bg-gray-700 rounded-lg text-white">
-            <h3 className="text-lg font-semibold">Traffic Signal</h3>
-            <p><strong>State:</strong> {signalData.state?.toUpperCase()}</p>
-            <p><strong>Remaining Time:</strong> {remainingTime}s</p>
-            {signalData.manual_override && <p className="text-yellow-400">🚨 Manual Override Active</p>}
-            {signalData.emergency_mode && <p className="text-red-500">🚨 Emergency Mode Enabled</p>}
+        <div className={`relative flex flex-col items-center justify-evenly p-1 ${borderSize} border-gray-600 rounded-lg bg-black`}>
+            <div className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "red" ? "bg-red-500 shadow-red-500 shadow-lg" : "bg-gray-700"}`} />
+            <div className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "yellow" ? "bg-yellow-400 shadow-yellow-400 shadow-lg" : "bg-gray-700"}`} />
+            <div className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "green" ? "bg-green-500 shadow-green-500 shadow-lg" : "bg-gray-700"}`} />
+
+            {/* Timer Placement */}
+            <p className={`mt-1 text-lg font-extrabold ${remainingTime < 5 ? "text-red-500 animate-pulse" : "text-white"}`}>
+                {remainingTime}
+            </p>
         </div>
     );
 }
+
