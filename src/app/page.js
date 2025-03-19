@@ -12,7 +12,7 @@ export default function Home() {
       {/* 2x2 Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
         {cameras.slice(0, 4).map((camera) => (
-          <TrafficCamera key={camera.id} title={camera.title} wsUrl={camera.wsUrl} />
+          <TrafficCamera key={camera.id} title={camera.title} wsUrl={camera.wsUrl} mqttTopic={camera.topic} />
         ))}
       </div>
     </main>

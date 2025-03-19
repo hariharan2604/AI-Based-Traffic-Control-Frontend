@@ -1,10 +1,12 @@
 "use client";
+
 import useWebSocket from "@/app/hooks/useWebSocket";
+import SignalStatus from "./SignalStatus";
 import StatusIndicator from "./StatusIndicator";
 import VehicleStats from "./VehicleStats";
 import { motion } from "framer-motion";
 
-export default function TrafficCamera({ title, wsUrl }) {
+export default function TrafficCamera({ title, wsUrl, mqttTopic }) {
     const { frame, vehicleCounts, isConnected } = useWebSocket(wsUrl);
 
     return (
@@ -29,9 +31,9 @@ export default function TrafficCamera({ title, wsUrl }) {
                     </div>
                 )}
             </div>
-
-            {/* Vehicle Count Statistics */}
-            <VehicleStats vehicleCounts={vehicleCounts} />
+            {isConnected && <><SignalStatus mqttTopic={mqttTopic} />
+                <VehicleStats vehicleCounts={vehicleCounts} /></>}
+            
         </motion.div>
     );
 }
