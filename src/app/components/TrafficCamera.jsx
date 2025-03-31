@@ -11,7 +11,7 @@ export default function TrafficCamera({ title, wsUrl, mqttTopic }) {
 
     return (
         <motion.div
-            className="p-5 bg-gray-900/80 rounded-lg shadow-lg border border-gray-700 text-gray-200 transition-transform hover:scale-[1.02]"
+            className="p-5 bg-[var(--card-bg)] rounded-lg shadow-lg border border-[var(--border-color)] text-[var(--text-color)] transition-transform hover:scale-[1.02]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
         >
@@ -21,23 +21,33 @@ export default function TrafficCamera({ title, wsUrl, mqttTopic }) {
                 <StatusIndicator isConnected={isConnected} />
             </div>
 
-            {/* Traffic Camera Video Feed */}
-            <div className="border border-gray-700 rounded-lg overflow-hidden shadow-md">
-                {frame ? (
+            {/* Traffic Camera Video Feed with Modern Loader */}
+            <div className="border border-[var(--border-color)] rounded-lg overflow-hidden shadow-md relative">
+                {isConnected && frame ? (
                     <img src={frame} alt="Traffic Camera" className="w-full h-auto object-cover" />
                 ) : (
-                    <div className="h-40 flex items-center justify-center bg-gray-800 rounded-lg">
-                        <div className="animate-pulse w-14 h-14 bg-gray-600 rounded-full" />
+                    <div className="h-40 flex items-center justify-center bg-gray-300 dark:bg-gray-800 rounded-lg relative">
+                        {/* Modern Loader */}
+                        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                            <div className="flex space-x-2">
+                                <span className="w-4 h-4 bg-gray-500 dark:bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                                <span className="w-4 h-4 bg-gray-500 dark:bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                                <span className="w-4 h-4 bg-gray-500 dark:bg-gray-400 rounded-full animate-bounce"></span>
+                            </div>
+                            <p className="text-gray-600 dark:text-gray-400 text-sm">
+                                {isConnected ? "Loading video..." : "Disconnected"}
+                            </p>
+                        </div>
                     </div>
                 )}
             </div>
 
-            {/* Signal and Vehicle Stats (only if connected) */}
+            {/* Signal & Vehicle Stats */}
             {isConnected && (
                 <div className="mt-3 flex flex-wrap justify-between items-center gap-3">
                     <SignalStatus mqttTopic={mqttTopic} size="small" />
                     <div className="flex-1 min-w-[200px]">
-                        <VehicleStats vehicleCounts={vehicleCounts} size="small" />
+                        <VehicleStats vehicleCounts={vehicleCounts} />
                     </div>
                 </div>
             )}
