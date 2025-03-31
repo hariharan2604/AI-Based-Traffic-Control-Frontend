@@ -61,26 +61,26 @@ export default function SignalStatus({ mqttTopic, size = "large" }) {
             {/* Signal Lights */}
             <div className="flex flex-col items-center gap-2">
                 <div
-                    className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "red" ? "bg-red-500 shadow-red-600 shadow-lg animate-pulse" : "bg-gray-300 dark:bg-gray-700"
+                    className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "red" ? "bg-red-500 shadow-red-600 shadow-lg" : "bg-gray-300 dark:bg-gray-700"
                         }`}
                 />
                 <div
-                    className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "yellow" ? "bg-yellow-400 shadow-yellow-500 shadow-lg animate-pulse" : "bg-gray-300 dark:bg-gray-700"
+                    className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "yellow" ? "bg-yellow-400 shadow-yellow-500 shadow-lg" : "bg-gray-300 dark:bg-gray-700"
                         }`}
                 />
                 <div
-                    className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "green" ? "bg-green-500 shadow-green-600 shadow-lg animate-pulse" : "bg-gray-300 dark:bg-gray-700"
+                    className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "green" ? "bg-green-500 shadow-green-600 shadow-lg" : "bg-gray-300 dark:bg-gray-700"
                         }`}
                 />
             </div>
 
-            {/* Countdown Timer */}
-            <p
-                className={`text-2xl font-extrabold tracking-wide ${remainingTime < 5 ? "text-red-500 animate-pulse" : "text-gray-800 dark:text-gray-200"
-                    }`}
-            >
-                {remainingTime}s
-            </p>
+            <div className="relative flex items-center justify-center w-15 h-15 bg-black rounded-lg shadow-lg border-4 border-gray-700 dark:border-gray-500">
+                <p
+                    className={`text-2xl font-bold tracking-wide text-white ${remainingTime < 5 ? "text-red-500 animate-pulse" : "text-green-400"}`}
+                >
+                    {remainingTime}
+                </p>
+            </div>
         </div>
     );
 }
