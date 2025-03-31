@@ -15,7 +15,7 @@ export default function VehicleStats({ vehicleCounts }) {
         <div className="mt-6 p-5 bg-white dark:bg-gray-900 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 transition-all duration-300">
             {/* Header */}
             <div className="text-center text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                🚦 Total Vehicles: <span className="text-yellow-500 font-bold">{totalVehicles}</span>
+                Total Vehicles: <span className="text-yellow-500 font-bold">{totalVehicles}</span>
             </div>
 
             {/* Vehicle Stats Grid */}
@@ -34,7 +34,7 @@ export default function VehicleStats({ vehicleCounts }) {
 
                             {/* Vehicle Type Name */}
                             <span className="mt-2 text-sm capitalize text-gray-900 dark:text-gray-200 font-medium">
-                                {type}
+                                {type==='motorcycle'?'bike':type}
                             </span>
 
                             {/* Count */}

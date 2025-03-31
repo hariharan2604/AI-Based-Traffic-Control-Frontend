@@ -1,20 +1,75 @@
 @import 'tailwindcss';
 
 :root {
-    --bg-color: #f8f9fa;
-    --text-color: #222;
+    /* Light Mode Colors */
+    --bg-color: #f9fafb;
+    /* Softer white */
+    --text-color: #1f2937;
+    /* Darker gray for better contrast */
     --card-bg: #ffffff;
-    --border-color: #ddd;
+    /* White for clean UI */
+    --border-color: #e5e7eb;
+    /* Subtle border color */
+    --primary-color: #2563eb;
+    /* Tailwind Blue-600 */
+    --secondary-color: #6b7280;
+    /* Gray-500 */
+    --hover-bg: #f3f4f6;
+    /* Slight hover effect */
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    display: none;
 }
 
 .dark {
-    --bg-color: #111;
-    --text-color: #eaeaea;
-    --card-bg: #222;
-    --border-color: #444;
+    /* Dark Mode Colors */
+    --bg-color: #0f172a;
+    /* Dark Blue-900 */
+    --text-color: #f8fafc;
+    /* Almost white */
+    --card-bg: #1e293b;
+    /* Dark Blue-800 */
+    --border-color: #334155;
+    /* Blue Gray */
+    --primary-color: #3b82f6;
+    /* Bright Blue */
+    --secondary-color: #94a3b8;
+    /* Light Gray */
+    --hover-bg: #334155;
+    /* Soft hover effect */
+    --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Card Styling */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effects */
+.card:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: var(--secondary-color);
 }
