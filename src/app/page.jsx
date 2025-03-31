@@ -1,6 +1,5 @@
 import cameras from "@/app/config/cameras";
 import TrafficCamera from "@/app/components/TrafficCamera";
-// import ThemeToggle from "@/app/components/ThemeToggle";
 
 export default function Home() {
   return (
@@ -8,7 +7,6 @@ export default function Home() {
       {/* Dashboard Header */}
       <div className="flex items-center justify-between w-full max-w-6xl">
         <h1 className="text-4xl font-bold tracking-wide">🚦 Traffic Monitoring Dashboard</h1>
-        {/* <ThemeToggle /> */}
       </div>
 
       {/* 2x2 Grid Layout */}
