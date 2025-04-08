@@ -52,34 +52,53 @@ export default function SignalStatus({ mqttTopic, size = "large" }) {
     }
 
     const signalSize = size === "small" ? "w-8 h-8" : "w-14 h-14";
-    const borderSize = size === "small" ? "border-[2px]" : "border-[3px]";
+    const emergencyMode = signalData.emergency_mode;
 
     return (
-        <div
-            className={`flex flex-col items-center gap-3 p-4 rounded-xl shadow-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 transition-all duration-300`}
-        >
-            {/* Signal Lights */}
-            <div className="flex flex-col items-center gap-2">
-                <div
-                    className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "red" ? "bg-red-500 shadow-red-600 shadow-lg" : "bg-gray-300 dark:bg-gray-700"
-                        }`}
-                />
-                <div
-                    className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "yellow" ? "bg-yellow-400 shadow-yellow-500 shadow-lg" : "bg-gray-300 dark:bg-gray-700"
-                        }`}
-                />
-                <div
-                    className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "green" ? "bg-green-500 shadow-green-600 shadow-lg" : "bg-gray-300 dark:bg-gray-700"
-                        }`}
-                />
-            </div>
+        <div className="relative inline-block">
+            {/* Static Emergency Badge */}
+            {emergencyMode && (
+                <div className="absolute -top-3 -left-3 z-10 px-2 py-1 text-xs font-bold text-white bg-red-600 rounded-full shadow-md">
+                    🚨 Emergency
+                </div>
+            )}
 
-            <div className="relative flex items-center justify-center w-15 h-15 bg-black rounded-lg shadow-lg border-4 border-gray-700 dark:border-gray-500">
-                <p
-                    className={`text-2xl font-bold tracking-wide text-white ${remainingTime < 5 ? "text-red-500 animate-pulse" : "text-green-400"}`}
+            {/* Animated Glowing Ring on Emergency */}
+            <div
+                className={`
+                    transition-all duration-300 rounded-2xl p-1
+                    ${emergencyMode ? "ring-4 ring-red-500 animate-pulse ring-opacity-80" : ""}
+                `}
+            >
+                {/* ORIGINAL SIGNAL CARD */}
+                <div
+                    className={`flex flex-col items-center gap-3 p-4 rounded-xl shadow-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 transition-all duration-300`}
                 >
-                    {remainingTime}
-                </p>
+                    {/* Signal Lights */}
+                    <div className="flex flex-col items-center gap-2">
+                        <div
+                            className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "red" ? "bg-red-500 shadow-red-600 shadow-lg" : "bg-gray-300 dark:bg-gray-700"
+                                }`}
+                        />
+                        <div
+                            className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "yellow" ? "bg-yellow-400 shadow-yellow-500 shadow-lg" : "bg-gray-300 dark:bg-gray-700"
+                                }`}
+                        />
+                        <div
+                            className={`${signalSize} rounded-full transition-all duration-500 ${signalData.state === "green" ? "bg-green-500 shadow-green-600 shadow-lg" : "bg-gray-300 dark:bg-gray-700"
+                                }`}
+                        />
+                    </div>
+
+                    {/* Timer */}
+                    <div className="relative flex items-center justify-center w-15 h-15 bg-black rounded-lg shadow-lg border-4 border-gray-700 dark:border-gray-500">
+                        <p
+                            className={`text-2xl font-bold tracking-wide text-white ${remainingTime < 5 ? "text-red-500 animate-pulse" : "text-green-400"}`}
+                        >
+                            {remainingTime}
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     );

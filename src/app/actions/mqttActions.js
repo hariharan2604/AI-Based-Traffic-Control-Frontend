@@ -17,7 +17,7 @@ client.on("message", (topic, message) => {
             state: data.state || "unknown",
             remainingTime: data.duration || 0,
             manual_override: data.manual_override || false,
-            emergency_mode: data.emergency_mode || false,
+            emergency_mode: data.emergency || false,
             lastUpdate: Date.now(), // Timestamp of last update
         };
 
