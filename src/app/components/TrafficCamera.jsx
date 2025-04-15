@@ -35,7 +35,7 @@ export default function TrafficCamera({ title, wsUrl, mqttTopic }) {
                                 <span className="w-4 h-4 bg-gray-500 dark:bg-gray-400 rounded-full animate-bounce"></span>
                             </div>
                             <p className="text-gray-600 dark:text-gray-400 text-sm">
-                                {isConnected ? "Loading video..." : "Disconnected"}
+                                {isConnected ? "Loading video..." : "Connecting"}
                             </p>
                         </div>
                     </div>
